@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from TravelingCompanion import settings
 from companions import views
-from registation.views import CreateUser
+from registation.views import register
 
 admin.autodiscover()
 
@@ -22,7 +22,7 @@ urlpatterns = patterns('',
 
 (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'registration/login.html', 'redirect_field_name': '/'}),
 (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'registration/logout.html', 'next_page': '/'}),
-    url(r'^accounts/register/$', CreateUser.as_view(), name='register'),
+    url(r'^accounts/register/$', register, name='register'),
     #(r'^accounts/', include('registration.backends.default.urls')),
     #(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     #(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
