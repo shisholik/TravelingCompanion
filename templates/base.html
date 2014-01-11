@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}TravelingCompanion.com{% endblock %}</title>
+
+<link href="{% static "companions/css/ui-lightness/jquery-ui-1.10.3.custom.css" %}" rel="stylesheet">
+<script src="{% static "companions/js/jquery-1.9.1.js" %}"></script>
+  <script src="/static/companions/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script>
+  $(function() {
+    $( "#id_departureDate" ).datepicker();
+  });
+  </script>
+</head>
+<body>
+<H1>Traveling companion</H1>
+{% block auth %}
+{% if user.is_authenticated %}
+<H5>Hi {{ user.username }}! <a href="/accounts/logout/">logout</a></H5>
+{% else %}
+<H5><a href="/accounts/login/">Log in</a> or <a href="/accounts/register/">Sign Up</a></H5>
+{%  endif %}
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,33 @@
+{%  extends "base.html" %}
+
+{% block content %}
+<h3><a href="{% url 'index' %}">all routes</a></h3>
+<h2>{{ route.cityA }} -> {{ route.cityB }}
+{% if route.creator == user %}
+<a href="{% url 'edit' route.id %}">edit </a>
+{% endif %}
+</h2>
+<h4>creator: {{ route.creator.username }}</h4>
+<p>Description: {{ route.description }}</p>
+<p>Departure date: {{ route.departureDate }}</p>
+
+    <h3>Companions:</h3>
+
+    {% for user in route.users.all %}
+        <a>{{ user.username }}</a> <a>{{ user.routes }}</a><br>
+    {% empty %}
+        Where is no one!<br>
+    {% endfor %}
+    {% if user != route.creator %}
+        {% if user in route.users.all %}
+            <a href="{% url 'imnotgoing' route.id %}">I changed my mind:(</a>
+        {% else %}
+            {% if route.users.all|length <= route.maxCompanions and user.is_authenticated %}
+                <a href="{% url 'imgoing' route.id %}">I'm going!</a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+
+
+{% endblock %}
