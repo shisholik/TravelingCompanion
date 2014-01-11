@@ -13,14 +13,25 @@
     $( "#id_departureDate" ).datepicker();
   });
   </script>
+
+<style>
+    .field {
+     margin: 0px;
+        padding: 0px
+    }
+
+
+</style>
 </head>
 <body>
 <H1>Traveling companion</H1>
 {% block auth %}
+<H5 class="field" style="position: relative; top: -20px; left: 10px; ">
 {% if user.is_authenticated %}
-<H5>Hi {{ user.username }}! <a href="/accounts/logout/">logout</a></H5>
+Hi {{ user.username }}! <a href="/accounts/logout/">logout</a>
 {% else %}
-<H5><a href="/accounts/login/">Log in</a> or <a href="/accounts/register/">Sign Up</a></H5>
+<a href="/accounts/login/">Log in</a> or <a href="/accounts/register/">Sign Up</a>
+</H5>
 {%  endif %}
 
 {% endblock %}

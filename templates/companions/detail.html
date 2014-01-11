@@ -1,20 +1,21 @@
 {%  extends "base.html" %}
 
 {% block content %}
-<h3><a href="{% url 'index' %}">all routes</a></h3>
-<h2>{{ route.cityA }} -> {{ route.cityB }}
-{% if route.creator == user %}
-<a href="{% url 'edit' route.id %}">edit </a>
-{% endif %}
-</h2>
-<h4>creator: {{ route.creator.username }}</h4>
-<p>Description: {{ route.description }}</p>
-<p>Departure date: {{ route.departureDate }}</p>
 
-    <h3>Companions:</h3>
+<h3><a href="{% url 'index' %}">all routes</a> | {{ route.cityA }} -> {{ route.cityB }}
+{% if route.creator == user %}
+<a style="font-size: medium" href="{% url 'edit' route.id %}">edit </a>
+{% endif %}
+</h3>
+<div >
+<p class="field">Creator: {{ route.creator.username }}</p>
+<p class="field">Description: {{ route.description }}</p>
+<p class="field">Departure date: {{ route.departureDate }}</p>
+</div>
+    <h4 style="margin: 10px">Companions({{ route.users.all|length }}/{{ route.maxCompanions }}):</h4>
 
     {% for user in route.users.all %}
-        <a>{{ user.username }}</a> <a>{{ user.routes }}</a><br>
+        <a style="margin-left: 30px">{{ user.username }}</a> <a>{{ user.routes }}</a><br>
     {% empty %}
         Where is no one!<br>
     {% endfor %}
