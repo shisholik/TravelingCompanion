@@ -45,6 +45,13 @@ class EditView(UpdateView):
     fields = ['cityA','cityB','departureDate','maxCompanions','description']
     def get_success_url(self):
         return reverse('detail', args=(self.get_object().id,))
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.creator == request.user:
+            return super(UpdateView, self).get(request, *args, **kwargs)
+        else:
+            return redirect(reverse('detail',args=(self.object.id,)))
+
     #template_name = 'companions/detail.html'
 
 
